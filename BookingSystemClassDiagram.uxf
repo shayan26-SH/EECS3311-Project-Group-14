@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>530</x>
+      <y>130</y>
+      <w>390</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>/System User/
+--
+-email: String
+-password: String
+-name: String
+-accountType: AccountType
+--
++verify(): boolean
++getEmail(): String
++changeEmail(email:String)
++getPassword(): String
++changePassword(pwd:String)
++getName(): String
++changeName(name:String)
++getAccountType(): AccountType
+/+createAccount()/</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>210</x>
+      <y>430</y>
+      <w>450</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>RegisteredUser
+--
+-bookingsList: ArrayList&lt;Booking&gt;
+-studentOrgID: int
+--
++setOrgID(id: int)
++viewAvailableRooms(): String
++viewBookings(): ArrayList&lt;Booking&gt;
++bookRoom(room:Room): Booking
++modifyBooking(booking:Booking): boolean
++cancelBooking(booking:Booking)
++extendBooking(booking:Booking, duration:float): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>800</x>
+      <y>450</y>
+      <w>380</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>Administrator
+--
++addRoom(room:Room)
++enableRoom(room:Room)
++disableRoom(room:Room)
++closeRoom(room:Room)
++viewRoomStatus(room:Room)
++viewAllBookings():HashMap&lt;Booking&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1270</x>
+      <y>420</y>
+      <w>500</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>Chief Event Coordinator
+--
++generateAdminAccount(name:String,email:String): Administrator</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>410</x>
+      <y>370</y>
+      <w>250</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>230.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>680</x>
+      <y>370</y>
+      <w>320</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;300.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>850</x>
+      <y>370</y>
+      <w>510</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;490.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1060</x>
+      <y>130</y>
+      <w>290</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>AccountType
+--
+-name: String
+-hourlyRate: float
+-requiresVerification: boolean
+--
++UniversityVerified(): boolean
++getHourlyRate(): float
++getAccountType(): String
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1460</x>
+      <y>270</y>
+      <w>310</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>University Verification Service
+--
++verifyUniversityUser(user:User):boolean
++verifyCredentials(user:User): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>830</x>
+      <y>90</y>
+      <w>660</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>640.0;180.0;640.0;10.0;150.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>910</x>
+      <y>300</y>
+      <w>570</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;550.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>910</x>
+      <y>200</y>
+      <w>170</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=0..*</panel_attributes>
+    <additional_attributes>150.0;10.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1240</x>
+      <y>570</y>
+      <w>310</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>Room
+--
+-roomID:int
+-capacity:int
+-location:String
+-status:RoomStatus
+-booked:ArrayList&lt;TimeSlot&gt;
+--
++enable()
++disable()
++isAvailable(time:TimeSlot):boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1670</x>
+      <y>600</y>
+      <w>170</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>TimeSlot
+--
++start:DateTime
++end:DateTime</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1850</x>
+      <y>630</y>
+      <w>160</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>«enumeration»
+RoomStatus
+--
+ENABLED
+DISABLED
+CLOSED</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1540</x>
+      <y>620</y>
+      <w>150</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m2=0..*
+r2=booked</panel_attributes>
+    <additional_attributes>130.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1540</x>
+      <y>680</y>
+      <w>330</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..*
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;310.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>780</x>
+      <y>660</y>
+      <w>310</w>
+      <h>300</h>
+    </coordinates>
+    <panel_attributes>Booking
+--
+-id:int
+-user:RegisteredUser
+-room:Room
+-time:TimeSlot
+-createAt:DateTime
+/checkInTime:DateTime
+-checkedIn:boolean
+-passedOccupancyCheck:boolean
+-status:BookingStatus
+-payment:Payment
+--
++cancel()
++extend(duration:float):boolean
++checkIn()
++edit()
++getStatus()
++pay()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1080</x>
+      <y>720</y>
+      <w>180</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=0..*
+m2=1
+r2=reservedRoom</panel_attributes>
+    <additional_attributes>10.0;50.0;160.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1340</x>
+      <y>840</y>
+      <w>200</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>IDBadgeScanner
+--
+-scanIDBadge()
++getIdBadgeInfo():String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1580</x>
+      <y>780</y>
+      <w>220</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>OccupancySensor
+--
+-detectOccupancy()
++getOccupancyInfo():String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1340</x>
+      <y>730</y>
+      <w>60</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;
+m1=0..*
+m2=1</panel_attributes>
+    <additional_attributes>20.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1380</x>
+      <y>730</y>
+      <w>230</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;&gt;&gt;&gt;&gt;
+m1=0..*
+m2=1</panel_attributes>
+    <additional_attributes>210.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1160</x>
+      <y>870</y>
+      <w>140</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>«enumeration»
+BookingStatus
+--
+PENDING
+COMPLETED
+CANCELLED
+NO_SHOW
+ERROR</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1080</x>
+      <y>810</y>
+      <w>180</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..*
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;150.0;10.0;150.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>340</x>
+      <y>710</y>
+      <w>310</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>Payment
+--
+-id:int
+-booking:Booking
+-totalAmount:float
+-type:PaymentType
+-status:PaymentStatus
+--
+-calculateAmount()
++chargeDeposit()
++chargeTotalRemainingAmount()
++processRefund()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>810</y>
+      <w>170</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>«enumeration»
+PaymentStatus
+--
+OVERDUE
+PAID
+FAILED
+REFUNDED
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>40</x>
+      <y>680</y>
+      <w>190</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>«enumeration»
+PaymentType
+--
+CREDIT CARD
+DEBIT CARD
+INSTITUTIONAL BILLING</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>160</x>
+      <y>830</y>
+      <w>200</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..*
+m2=1</panel_attributes>
+    <additional_attributes>180.0;10.0;40.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>220</x>
+      <y>710</y>
+      <w>140</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..*
+m2=1</panel_attributes>
+    <additional_attributes>120.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>800</y>
+      <w>160</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1</panel_attributes>
+    <additional_attributes>10.0;10.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>650</x>
+      <y>560</y>
+      <w>210</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;
+m1=1
+m2=0..*</panel_attributes>
+    <additional_attributes>10.0;10.0;170.0;60.0;170.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>580</x>
+      <y>260</y>
+      <w>530</w>
+      <h>470</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>510.0;10.0;210.0;210.0;10.0;450.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1080</x>
+      <y>360</y>
+      <w>290</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+creates</panel_attributes>
+    <additional_attributes>10.0;90.0;90.0;20.0;270.0;20.0;270.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1080</x>
+      <y>540</y>
+      <w>700</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m2=0..*
+r2=booked</panel_attributes>
+    <additional_attributes>680.0;60.0;620.0;10.0;150.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1170</x>
+      <y>510</y>
+      <w>210</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>190.0;60.0;190.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>
