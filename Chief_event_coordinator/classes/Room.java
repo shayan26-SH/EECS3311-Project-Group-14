@@ -1,0 +1,4 @@
+/**
+ * Room
+ */
+public class Room {}
