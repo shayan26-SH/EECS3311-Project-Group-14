@@ -1,4 +1,0 @@
-/**
- * Booking
- */
-public class Booking {}

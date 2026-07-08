@@ -1,3 +1,5 @@
+//package Chief_event_coordinator.Classes;
+
 public class AdminDisplay {
 
   private Administrator administrator;

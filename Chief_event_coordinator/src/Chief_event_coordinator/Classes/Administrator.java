@@ -1,4 +1,6 @@
-import java.util.*;
+//package Chief_event_coordinator.Classes;
+
+import java.util.HashMap;
 
 public class Administrator {
 
@@ -37,30 +39,19 @@ public class Administrator {
   public void setEmail(String email) {
     this.email = email;
   }
-  
-  public void addRoom ( Room room){
 
-  }
+  public void addRoom(Room room) {}
 
-public void closeRoom ( Room room){
+  public void closeRoom(Room room) {}
 
-  }
-public void enableRoom ( Room room){
+  public void enableRoom(Room room) {}
 
-  }
+  public void disableRoom(Room room) {}
 
-  public void disableRoom ( Room room){
+  public void viewRoomStatus(Room room) {}
 
-  }
-
-public void viewRoomStatus ( Room room){
-
-  }
-public HashMap<Integer, Booking> viewBookings (){
+  public HashMap<Integer, Booking> viewBookings() {
     System.out.println("Viewing all bookings");
     return new HashMap<>();
-
   }
-
-
 }
