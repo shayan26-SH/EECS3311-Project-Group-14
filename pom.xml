@@ -9,9 +9,10 @@
     <packaging>pom</packaging>
 
     <name>EECS3311 Project Group 14</name>
-    <description>Root aggregator POM (added to satisfy CI).
-    This POM intentionally does not declare modules to avoid failing
-    when sub-modules do not yet have their own POMs.</description>
+    <description>YorkU Conference Room Scheduler
+Welcome to the YorkU Conference Room Scheduler project.
+This repository contains the design documentation for a GUI-based 
+Java room booking system created for EECS 3311 Software Design at York University. </description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
