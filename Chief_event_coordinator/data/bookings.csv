@@ -1,0 +1,3 @@
+bookingId,roomId,userEmail,status
+1,101,alice@yorku.ca,PENDING
+2,102,bob@yorku.ca,CONFIRMED
