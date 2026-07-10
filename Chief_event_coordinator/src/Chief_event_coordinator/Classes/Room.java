@@ -9,7 +9,6 @@ package Chief_event_coordinator.Classes;
  * so nothing that already depends on Room breaks.
  */
 public class Room {
-
     private int roomid;
     private RoomStatus status;
 

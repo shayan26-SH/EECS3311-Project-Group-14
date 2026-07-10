@@ -46,9 +46,8 @@ public class Booking implements BookingSubject {
 
     @Override
     public void notifyObservers(BookingStatus oldStatus, BookingStatus newStatus) {
-        for (BookingObserver observer : observers) {
+        for (BookingObserver observer : observers)
             observer.onBookingStatusChanged(this, oldStatus, newStatus);
-        }
     }
 
     // --- Status transition ---

@@ -19,7 +19,6 @@ import java.util.Map;
  *   Update Room Details, View Room Availability.
  */
 public class Administrator {
-
     private String name;
     private String email;
 
@@ -56,34 +55,40 @@ public class Administrator {
     /** Req6: Enable Room */
     public void enableRoom(Room room) {
         Room managed = rooms.get(room.getRoomid());
-        if (managed == null) {
+
+        if (managed == null)
             System.out.println("[Administrator " + name + "] Room " + room.getRoomid() + " not found");
-            return;
+
+        else {
+          managed.setStatus(RoomStatus.AVAILABLE);
+          System.out.println("[Administrator " + name + "] Enabled room " + managed.getRoomid());
         }
-        managed.setStatus(RoomStatus.AVAILABLE);
-        System.out.println("[Administrator " + name + "] Enabled room " + managed.getRoomid());
     }
 
     /** Req6: Disable Room */
     public void disableRoom(Room room) {
         Room managed = rooms.get(room.getRoomid());
-        if (managed == null) {
+
+        if (managed == null)
             System.out.println("[Administrator " + name + "] Room " + room.getRoomid() + " not found");
-            return;
+
+        else {
+          managed.setStatus(RoomStatus.DISABLED);
+          System.out.println("[Administrator " + name + "] Disabled room " + managed.getRoomid());
         }
-        managed.setStatus(RoomStatus.DISABLED);
-        System.out.println("[Administrator " + name + "] Disabled room " + managed.getRoomid());
     }
 
     /** Req6: Close Room for Maintenance */
     public void closeRoom(Room room) {
         Room managed = rooms.get(room.getRoomid());
-        if (managed == null) {
+
+        if (managed == null)
             System.out.println("[Administrator " + name + "] Room " + room.getRoomid() + " not found");
-            return;
+
+        else {
+          managed.setStatus(RoomStatus.MAINTENANCE);
+          System.out.println("[Administrator " + name + "] Room " + managed.getRoomid() + " closed for maintenance");
         }
-        managed.setStatus(RoomStatus.MAINTENANCE);
-        System.out.println("[Administrator " + name + "] Room " + managed.getRoomid() + " closed for maintenance");
     }
 
     /** Req6/Req7: View Room Availability for a specific room */
@@ -96,12 +101,14 @@ public class Administrator {
     /** Req7: Update Room Details (currently roomid/status; extend as more room fields are added) */
     public void updateRoomDetails(int roomId, RoomStatus newStatus) {
         Room managed = rooms.get(roomId);
-        if (managed == null) {
+
+        if (managed == null)
             System.out.println("[Administrator " + name + "] Room " + roomId + " not found");
-            return;
+
+        else {
+          managed.setStatus(newStatus);
+          System.out.println("[Administrator " + name + "] Updated room " + roomId + " -> " + newStatus);
         }
-        managed.setStatus(newStatus);
-        System.out.println("[Administrator " + name + "] Updated room " + roomId + " -> " + newStatus);
     }
 
     public void trackBooking(Booking booking) {
@@ -110,7 +117,7 @@ public class Administrator {
 
     public HashMap<Integer, Booking> viewBookings() {
         System.out.println("[Administrator " + name + "] Viewing all bookings (" + bookings.size() + ")");
-        return new HashMap<>(bookings);
+        return new HashMap<Integer, Booking>(bookings);
     }
 
     public Map<Integer, Room> getManagedRooms() {
