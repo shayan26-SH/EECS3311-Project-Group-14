@@ -199,32 +199,7 @@ Each branch contains its own commits, implementation files, and project progress
 
 ---
 
-## Objectives
 
-This project demonstrates the application of software engineering principles by:
-
-- Performing requirements analysis
-- Identifying system actors
-- Designing UML models
-- Modeling system behavior
-- Modeling object-oriented relationships
-- Designing interactions between software and external systems
-
----
-
-## AI Assistance
-
-ChatGPT (GPT-5) and Claude were used only as supporting tools for:
-
-- Clarifying UML notation
-- Reviewing UML conventions
-- Brainstorming actor identification
-- Suggesting message names
-- Verifying diagram consistency
-
-All final design decisions, UML diagrams, and system models were created, reviewed, and validated by the project team according to the project requirements.
-
----
 
 ## Authors
 
