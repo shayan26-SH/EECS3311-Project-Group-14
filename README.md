@@ -1,1 +1,4 @@
+##Strategy Pattern##
+
+The Strategy Pattern fits well when there are several algorithms for implementing one object or situation. The payment type fits this pattern because the user can perform the payment operation in three different ways (via Credit, Debit or Institutional Billing). Hence, we’ve used Payment Strategy to handle this. Payment class is the context class with a composition 1-to-1 relationship with the Payment Strategy Interface. An interface is chosen over an abstract class because there is no shared code among the three concrete strategy classes. So, the CreditCardStrategy, DebitCardStrategy and InstitutionalBillingStrategy concrete strategy methods implement the PaymentStrategy interface and have implementations for each of the methods outlined in the interface. This allows the program (User-GUI) to dynamically select the payment strategy and pass the information to its constructor(s).
 Please visit each of the branches to view commits and files.
