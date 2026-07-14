@@ -12,7 +12,6 @@ import Chief_event_coordinator.Classes.Booking;
  * touching Booking or any other observer.
  */
 public class UserNotificationObserver implements BookingObserver {
-
     private final String userEmail;
 
     public UserNotificationObserver(String userEmail) {
@@ -24,22 +23,22 @@ public class UserNotificationObserver implements BookingObserver {
         String message;
         switch (newStatus) {
             case CONFIRMED:
-                message = "Your booking " + booking.getBookingId() + " is confirmed.";
+                message = "Your booking " + booking.getBookingid() + " is confirmed.";
                 break;
             case CANCELLED:
-                message = "Your booking " + booking.getBookingId() + " has been cancelled.";
+                message = "Your booking " + booking.getBookingid() + " has been cancelled.";
                 break;
             case EXTENDED:
-                message = "Your booking " + booking.getBookingId() + " has been extended.";
+                message = "Your booking " + booking.getBookingid() + " has been extended.";
                 break;
             case CHECKED_IN:
-                message = "You have been checked in for booking " + booking.getBookingId() + ".";
+                message = "You have been checked in for booking " + booking.getBookingid() + ".";
                 break;
             case NO_SHOW:
-                message = "Booking " + booking.getBookingId() + " was marked as a no-show.";
+                message = "Booking " + booking.getBookingid() + " was marked as a no-show.";
                 break;
             default:
-                message = "Your booking " + booking.getBookingId() + " status changed to " + newStatus + ".";
+                message = "Your booking " + booking.getBookingid() + " status changed to " + newStatus + ".";
         }
         sendMessage(message);
     }

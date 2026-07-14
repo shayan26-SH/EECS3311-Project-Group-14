@@ -15,7 +15,6 @@ import java.util.List;
  * without querying every Booking object directly.
  */
 public class AdminDashboardObserver implements BookingObserver {
-
     private final Administrator administrator;
     private final List<String> activityLog = new ArrayList<>();
 
@@ -25,7 +24,7 @@ public class AdminDashboardObserver implements BookingObserver {
 
     @Override
     public void onBookingStatusChanged(Booking booking, BookingStatus oldStatus, BookingStatus newStatus) {
-        String entry = "Booking " + booking.getBookingId() + " (Room " + booking.getRoomId() + "): "
+        String entry = "Booking " + booking.getBookingid() + " (Room " + booking.getRoomName().getRoomid() + "): "
                 + (oldStatus == null ? "created" : oldStatus + " -> ") + newStatus;
         activityLog.add(entry);
         System.out.println("[AdminDashboard: " + administrator.getName() + "] " + entry);

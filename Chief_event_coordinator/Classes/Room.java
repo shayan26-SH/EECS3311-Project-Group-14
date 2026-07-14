@@ -17,11 +17,6 @@ public class Room {
         this.status = RoomStatus.AVAILABLE;
     }
 
-    public Room(int roomid, RoomStatus status) {
-        this.roomid = roomid;
-        this.status = status;
-    }
-
     public int getRoomid() {
         return roomid;
     }

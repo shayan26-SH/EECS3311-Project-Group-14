@@ -16,7 +16,6 @@ import Chief_event_coordinator.Classes.RoomStatus;
  *   - CANCELLED / NO_SHOW    -> room marked AVAILABLE (if not disabled/maintenance)
  */
 public class RoomAvailabilityObserver implements BookingObserver {
-
     private final Room room;
 
     public RoomAvailabilityObserver(Room room) {
@@ -25,22 +24,21 @@ public class RoomAvailabilityObserver implements BookingObserver {
 
     @Override
     public void onBookingStatusChanged(Booking booking, BookingStatus oldStatus, BookingStatus newStatus) {
-        if (room.getRoomid() != booking.getRoomId()) {
+        if (room.getRoomid() != booking.getRoomName().getRoomid())
             return; // this observer only cares about its own room
-        }
 
         switch (newStatus) {
             case CONFIRMED:
             case CHECKED_IN:
-                if (room.getStatus() == RoomStatus.AVAILABLE) {
+                if (room.getStatus() == RoomStatus.AVAILABLE)
                     room.setStatus(RoomStatus.OCCUPIED);
-                }
+                
                 break;
             case CANCELLED:
             case NO_SHOW:
-                if (room.getStatus() == RoomStatus.OCCUPIED) {
+                if (room.getStatus() == RoomStatus.OCCUPIED)
                     room.setStatus(RoomStatus.AVAILABLE);
-                }
+                
                 break;
             default:
                 break;

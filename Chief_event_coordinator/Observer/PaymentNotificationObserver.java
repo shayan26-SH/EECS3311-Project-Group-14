@@ -15,7 +15,6 @@ import Chief_event_coordinator.Classes.Booking;
  * Booking just calls notifyObservers() and this class reacts.
  */
 public class PaymentNotificationObserver implements BookingObserver {
-
     private final Payment payment;
     private static final double UPFRONT_FEE = 1.0; // placeholder: one-hour upfront fee unit
 
@@ -28,16 +27,16 @@ public class PaymentNotificationObserver implements BookingObserver {
         switch (newStatus) {
             case CONFIRMED:
                 boolean charged = payment.charge(UPFRONT_FEE);
-                System.out.println("[Payment] Booking " + booking.getBookingId()
+                System.out.println("[Payment] Booking " + booking.getBookingid()
                         + " confirmed -> charge " + (charged ? "succeeded" : "FAILED"));
                 break;
             case CANCELLED:
                 boolean refunded = payment.refund(UPFRONT_FEE);
-                System.out.println("[Payment] Booking " + booking.getBookingId()
+                System.out.println("[Payment] Booking " + booking.getBookingid()
                         + " cancelled -> refund " + (refunded ? "issued" : "not issued"));
                 break;
             case NO_SHOW:
-                System.out.println("[Payment] Booking " + booking.getBookingId()
+                System.out.println("[Payment] Booking " + booking.getBookingid()
                         + " no-show -> fee forfeited, no refund");
                 break;
             default:

@@ -12,21 +12,10 @@ import Chief_event_coordinator.Observer.UserNotificationObserver;
 import Chief_event_coordinator.Persistence.BookingCSVManager;
 import Chief_event_coordinator.Persistence.RoomCSVManager;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-/**
- * ObserverPatternDemo
- *
- * Demonstrates the Observer pattern end-to-end using CSV-backed data:
- *   1. Load rooms and bookings from CSV.
- *   2. Register observers (payment, room availability, user
- *      notification, admin dashboard) on a booking.
- *   3. Drive the booking through its lifecycle and show every
- *      observer reacting automatically.
- *
- * Run this class's main() directly to see console output suitable
- * for the demo video (Task 3).
- */
 public class ObserverPatternDemo {
 
     public static void main(String[] args) throws Exception {
@@ -37,23 +26,26 @@ public class ObserverPatternDemo {
         BookingCSVManager bookingCSVManager = new BookingCSVManager();
 
         List<Room> rooms = roomCSVManager.load(roomsPath);
-        List<Booking> bookings = bookingCSVManager.load(bookingsPath);
+
+        Map<Integer, Room> roomsById = new HashMap<Integer, Room>();
+
+        for (Room r : rooms)
+            roomsById.put(r.getRoomid(), r);
+
+        List<Booking> bookings = bookingCSVManager.load(bookingsPath, roomsById);
 
         Administrator admin = new Administrator("Tazwar", "tazwar@yorku.ca");
-        for (Room r : rooms) {
+
+        for (Room r : rooms)
             admin.addRoom(r);
-        }
 
-        // Pick the booking for room 101 (bookingId 1) to drive through its lifecycle
         Booking booking = bookings.get(0);
-        Room room101 = rooms.get(0);
+        Room room101 = booking.getRoomName();
 
-        // --- Wire up observers (Subject/Observer registration) ---
         booking.addObserver(new PaymentNotificationObserver(new StubPayment()));
         booking.addObserver(new RoomAvailabilityObserver(room101));
-        booking.addObserver(new UserNotificationObserver(booking.getUserEmail()));
+        booking.addObserver(new UserNotificationObserver("alice@yorku.ca"));
         booking.addObserver(new AdminDashboardObserver(admin));
-        admin.trackBooking(booking);
 
         System.out.println("=== Initial state ===");
         admin.viewRoomStatus(room101);

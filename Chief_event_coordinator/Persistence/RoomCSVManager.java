@@ -16,18 +16,21 @@ import java.util.List;
  * Columns: roomid,status
  */
 public class RoomCSVManager {
-
     public List<Room> load(String path) throws Exception {
-        List<Room> rooms = new ArrayList<>();
+        List<Room> rooms = new ArrayList<Room>();
         CsvReader reader = new CsvReader(path);
         reader.readHeaders();
 
         while (reader.readRecord()) {
             int roomid = Integer.parseInt(reader.get("roomid"));
             RoomStatus status = RoomStatus.valueOf(reader.get("status"));
-            rooms.add(new Room(roomid, status));
+            Room room = new Room(roomid);
+            room.setStatus(status);
+            rooms.add(room);
         }
+
         reader.close();
+
         return rooms;
     }
 
@@ -42,6 +45,7 @@ public class RoomCSVManager {
             writer.write(r.getStatus().name());
             writer.endRecord();
         }
+
         writer.close();
     }
 }
