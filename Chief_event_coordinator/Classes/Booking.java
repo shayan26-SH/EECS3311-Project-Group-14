@@ -4,93 +4,135 @@ import User.RegisteredUser;
 
 public class Booking {
 
-  private String bookingid;
-  private RegisteredUser registeredUser;
-  private Room roomName;
-  private String status;
+    // Booking ID
+    private String bookingid;
 
-  // Existing two-argument constructor
-  public Booking(String bookingid, Room roomName) {
-    this.bookingid = bookingid;
-    this.roomName = roomName;
-    this.status = "Active";
-  }
+    // User who made the booking
+    private RegisteredUser registeredUser;
 
-  // Missing three-argument constructor
-  public Booking(
-    String bookingid,
-    RegisteredUser registeredUser,
-    Room roomName
-  ) {
-    this.bookingid = bookingid;
-    this.registeredUser = registeredUser;
-    this.roomName = roomName;
-    this.status = "Active";
-  }
+    // Room assigned to the booking
+    private Room roomName;
 
-  // Edit the booking's room
-  public void edit(Room newRoom) {
-    if (newRoom == null) {
-      System.out.println("The new room cannot be null.");
-      return;
+    // Current booking status
+    private String status;
+
+    // Existing two-argument constructor
+    public Booking(String bookingid, Room roomName) {
+        this.bookingid = bookingid;
+        this.roomName = roomName;
+        this.status = "Active";
     }
 
-    this.roomName = newRoom;
-    System.out.println("Booking " + bookingid + " was edited.");
-  }
-
-  // No-argument edit method, only include this if RegisteredUser calls edit()
-  public void edit() {
-    System.out.println("Editing booking " + bookingid);
-  }
-
-  // Cancel the booking
-  public boolean cancel() {
-    if ("Cancelled".equals(status)) {
-      return false;
+    // Existing three-argument constructor
+    public Booking(
+            String bookingid,
+            RegisteredUser registeredUser,
+            Room roomName
+    ) {
+        this.bookingid = bookingid;
+        this.registeredUser = registeredUser;
+        this.roomName = roomName;
+        this.status = "Active";
     }
 
-    status = "Cancelled";
-    System.out.println("Booking " + bookingid + " was cancelled.");
-    return true;
-  }
+    // Edit the room for this booking
+    public boolean edit(Room newRoom) {
 
-  // Extend the booking
-  public boolean extend() {
-    if ("Cancelled".equals(status)) {
-      System.out.println("A cancelled booking cannot be extended.");
-      return false;
+        // Cannot edit a cancelled booking
+        if ("Cancelled".equalsIgnoreCase(status)) {
+            System.out.println("A cancelled booking cannot be edited.");
+            return false;
+        }
+
+        // Ensure the new room is valid
+        if (newRoom == null) {
+            System.out.println("The new room cannot be null.");
+            return false;
+        }
+
+        // Update the room
+        roomName = newRoom;
+
+        System.out.println("Booking " + bookingid + " was edited.");
+
+        return true;
     }
 
-    System.out.println("Booking " + bookingid + " was extended.");
-    return true;
-  }
+    // Edit booking information
+    public void edit() {
 
-  public String getBookingid() {
-    return bookingid;
-  }
+        // Check booking status
+        if ("Cancelled".equalsIgnoreCase(status)) {
+            System.out.println("A cancelled booking cannot be edited.");
+            return;
+        }
 
-  public void setBookingid(String bookingid) {
-    this.bookingid = bookingid;
-  }
+        System.out.println("Editing booking " + bookingid + ".");
+    }
 
-  public RegisteredUser getRegisteredUser() {
-    return registeredUser;
-  }
+    // Cancel the booking
+    public boolean cancel() {
 
-  public void setRegisteredUser(RegisteredUser registeredUser) {
-    this.registeredUser = registeredUser;
-  }
+        // Check if already cancelled
+        if ("Cancelled".equalsIgnoreCase(status)) {
+            System.out.println("Booking " + bookingid + " is already cancelled.");
+            return false;
+        }
 
-  public Room getRoomName() {
-    return roomName;
-  }
+        // Change booking status
+        status = "Cancelled";
 
-  public void setRoomName(Room roomName) {
-    this.roomName = roomName;
-  }
+        System.out.println("Booking " + bookingid + " was cancelled.");
 
-  public String getStatus() {
-    return status;
-  }
+        return true;
+    }
+
+    // Extend the booking
+    public boolean extend() {
+
+        // Cannot extend a cancelled booking
+        if ("Cancelled".equalsIgnoreCase(status)) {
+            System.out.println("A cancelled booking cannot be extended.");
+            return false;
+        }
+
+        System.out.println("Booking " + bookingid + " was extended.");
+
+        return true;
+    }
+
+    // Returns the booking ID
+    public String getBookingid() {
+        return bookingid;
+    }
+
+    // Updates the booking ID
+    public void setBookingid(String bookingid) {
+        this.bookingid = bookingid;
+    }
+
+    // Returns the registered user
+    public RegisteredUser getRegisteredUser() {
+        return registeredUser;
+    }
+
+    // Updates the registered user
+    public void setRegisteredUser(RegisteredUser registeredUser) {
+        this.registeredUser = registeredUser;
+    }
+
+    // Returns the booked room
+    public Room getRoomName() {
+        return roomName;
+    }
+
+    // Updates the booked room
+    public void setRoomName(Room roomName) {
+        this.roomName = roomName;
+    }
+
+    // Returns the booking status
+    public String getStatus() {
+        return status;
+    }
 }
