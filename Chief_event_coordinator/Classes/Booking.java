@@ -1,6 +1,6 @@
 package Chief_event_coordinator.Classes;
 
-import User.RegisteredUser;
+import SystemUser.RegisteredUser;
 
 public class Booking {
 
@@ -88,7 +88,7 @@ public class Booking {
     }
 
     // Extend the booking
-    public boolean extend() {
+    public boolean extend(float duration) {
 
         // Cannot extend a cancelled booking
         if ("Cancelled".equalsIgnoreCase(status)) {

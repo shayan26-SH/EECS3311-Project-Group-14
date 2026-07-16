@@ -1,8 +1,9 @@
-package User;
+package SystemUser;
 
 import AccountType.AccountType;
-import User.SystemUser;
 import java.util.ArrayList;
+import Chief_event_coordinator.Classes.Booking;
+import Chief_event_coordinator.Classes.Room;
 
 public class RegisteredUser extends SystemUser {
 
@@ -39,7 +40,7 @@ public class RegisteredUser extends SystemUser {
   }
 
   public Booking bookRoom(Room room) {
-    Booking booking = new Booking(bookingsList.size() + 1, this, room);
+    Booking booking = new Booking(String.valueOf(bookingsList.size() + 1), this, room);
 
     bookingsList.add(booking);
 
