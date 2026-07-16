@@ -1,11 +1,14 @@
 package User;
 
+import AccountType.AccountType;
+import User.SystemUser;
 import java.util.ArrayList;
 
 public class RegisteredUser extends SystemUser {
 
   private ArrayList<Booking> bookingsList;
   private int studentOrgID;
+  private AccountType AccountType;
 
   public RegisteredUser(
     String name,
@@ -36,7 +39,7 @@ public class RegisteredUser extends SystemUser {
   }
 
   public Booking bookRoom(Room room) {
-    Booking booking = new Booking(bookingsList.size() + 1, this, room, null);
+    Booking booking = new Booking(bookingsList.size() + 1, this, room);
 
     bookingsList.add(booking);
 
@@ -64,5 +67,13 @@ public class RegisteredUser extends SystemUser {
     }
 
     return false;
+  }
+
+  public AccountType getAccountType() {
+    return AccountType;
+  }
+
+  public void setAccountType(AccountType accountType) {
+    AccountType = accountType;
   }
 }
