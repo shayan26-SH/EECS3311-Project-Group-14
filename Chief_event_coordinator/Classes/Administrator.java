@@ -43,27 +43,27 @@ public class Administrator {
 
 	public void addRoom(Room room) {
 		rooms.put(room.getRoomid(), room);
-		System.out.println("Room " + room.getRoomid() + "Addeed");
+		System.out.println("Room " + room.getRoomid() + " added");
 	}
 
 	public void closeRoom(Room room) {
 		room.setStatus("Closed");
-		System.out.println("Room " + room.getRoomid() + "Closed");
+		System.out.println("Room " + room.getRoomid() + " closed");
 	}
 
 	public void enableRoom(Room room) {
-		room.setStatus("Enable");
-		System.out.println("Room " + room.getRoomid() + "Enable");
+		room.setStatus("Enabled");
+		System.out.println("Room " + room.getRoomid() + " enabled");
 	}
 
 	public void disableRoom(Room room) {
-		room.setStatus("Disable");
-		System.out.println("Room " + room.getRoomid() + "Disable");
+		room.setStatus("Disabled");
+		System.out.println("Room " + room.getRoomid() + " disabled");
 
 	}
 
 	public void viewRoomStatus(Room room) {
-		System.out.println("Room: " + room.getRoomid() + "Status: " + room.getStatus());
+		System.out.println("Room: " + room.getRoomid() + " Status: " + room.getStatus());
 	}
 
 	public HashMap<Integer, Booking> viewBookings() {

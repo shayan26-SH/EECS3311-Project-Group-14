@@ -11,6 +11,7 @@ The goal of the project is to provide a secure, efficient, and automated room bo
 ## Features
 
 ### Registered User
+
 - Create a new account
 - Verify university affiliation
 - Log into the system
@@ -23,6 +24,7 @@ The goal of the project is to provide a secure, efficient, and automated room bo
 - Check in using an ID badge
 
 ### Administrator
+
 - Add new rooms
 - Update room information
 - Enable rooms
@@ -31,11 +33,13 @@ The goal of the project is to provide a secure, efficient, and automated room bo
 - View room availability
 
 ### Chief Event Coordinator
+
 - Create administrator accounts
 - Manage administrator accounts
 - Verify administrator privileges
 
 ### External Services
+
 - User authentication
 - Payment processing
 - ID badge scanning
@@ -46,7 +50,7 @@ The goal of the project is to provide a secure, efficient, and automated room bo
 ## System Actors
 
 | Actor | Responsibilities |
-|--------|------------------|
+| --- | --- |
 | Registered User | Books and manages conference rooms |
 | Administrator | Maintains room information and availability |
 | Chief Event Coordinator | Creates and manages administrator accounts |
@@ -62,6 +66,7 @@ The goal of the project is to provide a secure, efficient, and automated room bo
 This project contains the following UML diagrams:
 
 ### Use Case Diagrams
+
 - Registered User
 - Administrator
 - Chief Event Coordinator
@@ -69,6 +74,7 @@ This project contains the following UML diagrams:
 - External/System Actors
 
 ### Sequence Diagrams
+
 - User Registration and Verification
 - Room Booking and Payment
 - Booking Edit / Cancel / Extend
@@ -76,6 +82,7 @@ This project contains the following UML diagrams:
 - Administrator Room Management
 
 ### Activity Diagrams
+
 - Registered User Workflow
 - Administrator Room Management
 - Payment Processing
@@ -103,6 +110,20 @@ The scheduler supports:
 - ID badge check-in
 - Occupancy verification
 - Automatic administrator account generation
+
+---
+
+## Strategy Pattern
+
+The Strategy Pattern fits well when several algorithms can handle one object or situation. Payment fits this pattern because a user can pay in three different ways: credit card, debit card, or institutional billing.
+
+This project uses a payment strategy model to handle those options. The `Payment` class is the context class and has a one-to-one composition relationship with the `PaymentStrategy` interface. An interface is used instead of an abstract class because there is no shared code among the three concrete strategy classes. `CreditCardStrategy`, `DebitCardStrategy`, and `InstitutionalBillingStrategy` each implement `PaymentStrategy`, allowing the user interface to dynamically select the payment strategy and pass the required information to its constructor.
+
+---
+
+## Facade Pattern
+
+The Facade Pattern is used for booking through `BookingFacade`. This class provides one simple interface for adding rooms, creating bookings, cancelling bookings, viewing bookings, and updating room availability. Code that needs to manage bookings can call the facade instead of directly coordinating `Administrator`, `Room`, and `Booking` objects.
 
 ---
 
@@ -136,13 +157,14 @@ These components provide services outside the application's control while suppor
 
 ```text
 YorkUConferenceRoomScheduler
-│
-├── Use Case Diagrams
-├── Sequence Diagrams
-├── Activity Diagrams
-├── Class Diagram
-├── Requirements Analysis
-└── AI Assistant Adaptation Report
+|
+|-- AccountType
+|-- Chief_event_coordinator
+|-- StrategyPattern
+|-- SystemUser
+|-- PaymentStrategyPattern.png
+|-- PaymentStrategyPattern.uxf
+`-- README.md
 ```
 
 ---
@@ -175,9 +197,13 @@ Open the project using your preferred IDE, such as:
 - IntelliJ IDEA
 - Visual Studio Code
 
-### 3. Explore the project
+### 3. Compile the Java source files
 
-Browse the UML diagrams, documentation, and source files included in the repository.
+From the project root, compile all Java source files:
+
+```bash
+javac AccountType/AccountType.java SystemUser/SystemUser.java Chief_event_coordinator/ChiefEventCoordinator.java Chief_event_coordinator/Classes/*.java Chief_event_coordinator/Abstract_Factory/*.java StrategyPattern/src/model/*.java
+```
 
 ### 4. View the development history
 
@@ -199,11 +225,9 @@ Each branch contains its own commits, implementation files, and project progress
 
 ---
 
-
-
 ## Authors
 
 **Group 14**
 
-**Course:** EECS 3311 – Software Design  
+**Course:** EECS 3311 - Software Design  
 **Institution:** York University

@@ -5,6 +5,13 @@ public class Booking {
 	private Room roomName;
 
 	public Booking(String bookingid, Room roomName) {
+		if (bookingid == null || bookingid.isEmpty()) {
+			throw new IllegalArgumentException("Booking id is required.");
+		}
+		if (roomName == null) {
+			throw new IllegalArgumentException("Room is required.");
+		}
+
 		this.bookingid = bookingid;
 		this.roomName = roomName;
 	}
