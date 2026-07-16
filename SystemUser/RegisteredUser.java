@@ -76,4 +76,8 @@ public class RegisteredUser extends SystemUser {
   public void setAccountType(AccountType accountType) {
     AccountType = accountType;
   }
+
+  public void addBooking(Booking booking) {
+    bookingsList.add(booking);
+  }
 }
