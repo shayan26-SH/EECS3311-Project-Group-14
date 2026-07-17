@@ -1,10 +1,9 @@
 package Chief_event_coordinator.Command;
 
 import Chief_event_coordinator.Classes.Room;
-import SystemUser.RegisteredUser;
+import User.RegisteredUser;
 
 public class BookRoomCommand implements Command {
-
     private RegisteredUser user;
     private Room room;
 

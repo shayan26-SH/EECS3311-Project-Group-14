@@ -3,12 +3,10 @@ package Test;
 import AccountType.AccountType;
 import Chief_event_coordinator.Classes.*;
 import Chief_event_coordinator.Command.*;
-import SystemUser.RegisteredUser;
+import User.RegisteredUser;
 
 public class CommandPatternTest {
-
     public static void main(String[] args) {
-
         // ==========================================================
         // Administrator Commands
         // ==========================================================

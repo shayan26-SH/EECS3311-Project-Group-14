@@ -1,10 +1,9 @@
 package Chief_event_coordinator.Command;
 
 import Chief_event_coordinator.Classes.Booking;
-import SystemUser.RegisteredUser;
+import User.RegisteredUser;
 
 public class CancelBookingCommand implements Command {
-
     private RegisteredUser user;
     private Booking booking;
 

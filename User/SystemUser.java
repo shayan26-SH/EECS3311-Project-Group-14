@@ -1,4 +1,4 @@
-package SystemUser;
+package User;
 
 import AccountType.*;
 
