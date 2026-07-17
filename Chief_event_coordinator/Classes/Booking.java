@@ -111,7 +111,7 @@ public class Booking implements BookingSubject {
      * Flagged for the team: if bookings need an actual stored duration,
      * add a field for it rather than discarding the parameter.
      */
-    public boolean extend() {
+    public boolean extend(float duration) {
         if (status == BookingStatus.CANCELLED) {
             System.out.println("A cancelled booking cannot be extended.");
 
@@ -120,7 +120,7 @@ public class Booking implements BookingSubject {
 
         else {
             setStatus(BookingStatus.EXTENDED);
-            System.out.println("Booking " + bookingid + " was extended.");
+            System.out.println("Booking " + bookingid + " was extended by " + duration + " hour(s).");
 
             return true;
         }
