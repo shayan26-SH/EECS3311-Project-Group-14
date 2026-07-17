@@ -1,138 +1,152 @@
 package Chief_event_coordinator.Classes;
 
-import SystemUser.RegisteredUser;
+import Chief_event_coordinator.Observer.BookingObserver;
+import Chief_event_coordinator.Observer.BookingStatus;
+import Chief_event_coordinator.Observer.BookingSubject;
+import User.RegisteredUser;
 
-public class Booking {
+import java.util.ArrayList;
+import java.util.List;
 
-    // Booking ID
+public class Booking implements BookingSubject {
     private String bookingid;
-
-    // User who made the booking
     private RegisteredUser registeredUser;
-
-    // Room assigned to the booking
     private Room roomName;
+    private BookingStatus status;
+    private final List<BookingObserver> observers = new ArrayList<BookingObserver>();
 
-    // Current booking status
-    private String status;
-
-    // Existing two-argument constructor
     public Booking(String bookingid, Room roomName) {
         this.bookingid = bookingid;
         this.roomName = roomName;
-        this.status = "Active";
+        this.status = BookingStatus.ACTIVE;
     }
 
-    // Existing three-argument constructor
-    public Booking(
-            String bookingid,
-            RegisteredUser registeredUser,
-            Room roomName
-    ) {
+    public Booking(String bookingid, RegisteredUser registeredUser, Room roomName) {
         this.bookingid = bookingid;
         this.registeredUser = registeredUser;
         this.roomName = roomName;
-        this.status = "Active";
+        this.status = BookingStatus.ACTIVE;
     }
 
-    // Edit the room for this booking
-    public boolean edit(Room newRoom) {
+    // --- BookingSubject ---
 
-        // Cannot edit a cancelled booking
-        if ("Cancelled".equalsIgnoreCase(status)) {
+    @Override
+    public void addObserver(BookingObserver observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(BookingObserver observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers(BookingStatus oldStatus, BookingStatus newStatus) {
+        for (BookingObserver o : observers)
+            o.onBookingStatusChanged(this, oldStatus, newStatus);
+    }
+
+    public void setStatus(BookingStatus newStatus) {
+        BookingStatus old = this.status;
+        this.status = newStatus;
+        notifyObservers(old, newStatus);
+    }
+
+    public BookingStatus getStatus() {
+        return status;
+    }
+
+    // --- Business methods (Req8, Req9) ---
+
+    public boolean edit(Room newRoom) {
+        if (status == BookingStatus.CANCELLED) {
             System.out.println("A cancelled booking cannot be edited.");
+
             return false;
         }
 
-        // Ensure the new room is valid
         if (newRoom == null) {
             System.out.println("The new room cannot be null.");
+
             return false;
         }
 
-        // Update the room
-        roomName = newRoom;
+        else {
+            roomName = newRoom;
+            System.out.println("Booking " + bookingid + " was edited.");
 
-        System.out.println("Booking " + bookingid + " was edited.");
-
-        return true;
+            return true;
+        }
     }
 
-    // Edit booking information
     public void edit() {
-
-        // Check booking status
-        if ("Cancelled".equalsIgnoreCase(status)) {
+        if (status == BookingStatus.CANCELLED)
             System.out.println("A cancelled booking cannot be edited.");
-            return;
-        }
 
-        System.out.println("Editing booking " + bookingid + ".");
+        else
+            System.out.println("Editing booking " + bookingid + ".");
     }
 
-    // Cancel the booking
     public boolean cancel() {
-
-        // Check if already cancelled
-        if ("Cancelled".equalsIgnoreCase(status)) {
+        if (status == BookingStatus.CANCELLED) {
             System.out.println("Booking " + bookingid + " is already cancelled.");
+
             return false;
         }
 
-        // Change booking status
-        status = "Cancelled";
+        else {
+            setStatus(BookingStatus.CANCELLED);
+            System.out.println("Booking " + bookingid + " was cancelled.");
 
-        System.out.println("Booking " + bookingid + " was cancelled.");
-
-        return true;
+            return true;
+        }
     }
 
-    // Extend the booking
+    /**
+     * Extends the booking by the given duration (hours). The duration is
+     * currently not tracked on Booking itself (no duration field exists
+     * yet) - accepted here so RegisteredUser.extendBooking() compiles.
+     * Flagged for the team: if bookings need an actual stored duration,
+     * add a field for it rather than discarding the parameter.
+     */
     public boolean extend(float duration) {
-
-        // Cannot extend a cancelled booking
-        if ("Cancelled".equalsIgnoreCase(status)) {
+        if (status == BookingStatus.CANCELLED) {
             System.out.println("A cancelled booking cannot be extended.");
+
             return false;
         }
 
-        System.out.println("Booking " + bookingid + " was extended.");
+        else {
+            setStatus(BookingStatus.EXTENDED);
+            System.out.println("Booking " + bookingid + " was extended by " + duration + " hour(s).");
 
-        return true;
+            return true;
+        }
     }
 
-    // Returns the booking ID
+    // --- Getters/setters ---
+
     public String getBookingid() {
         return bookingid;
     }
 
-    // Updates the booking ID
     public void setBookingid(String bookingid) {
         this.bookingid = bookingid;
     }
 
-    // Returns the registered user
     public RegisteredUser getRegisteredUser() {
         return registeredUser;
     }
 
-    // Updates the registered user
     public void setRegisteredUser(RegisteredUser registeredUser) {
         this.registeredUser = registeredUser;
     }
 
-    // Returns the booked room
     public Room getRoomName() {
         return roomName;
     }
 
-    // Updates the booked room
     public void setRoomName(Room roomName) {
         this.roomName = roomName;
-    }
-
-    // Returns the booking status
-    public String getStatus() {
-        return status;
     }
 }

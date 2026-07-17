@@ -1,26 +1,19 @@
-package SystemUser;
+package User;
 
 import AccountType.AccountType;
-import java.util.ArrayList;
 import Chief_event_coordinator.Classes.Booking;
 import Chief_event_coordinator.Classes.Room;
+import java.util.ArrayList;
 
 public class RegisteredUser extends SystemUser {
-
   private ArrayList<Booking> bookingsList;
   private int studentOrgID;
-  private AccountType AccountType;
+  private AccountType accountType;
 
-  public RegisteredUser(
-    String name,
-    String email,
-    String password,
-    AccountType accountType,
-    int studentOrgID
-  ) {
-    super(name, email, password, accountType);
+  public RegisteredUser(String name, String email, String password, AccountType accountType, int studentOrgID) {
+    super(email, password, name, accountType);
     this.studentOrgID = studentOrgID;
-    this.bookingsList = new ArrayList<>();
+    this.bookingsList = new ArrayList<Booking>();
   }
 
   public int getOrgID() {
@@ -40,8 +33,8 @@ public class RegisteredUser extends SystemUser {
   }
 
   public Booking bookRoom(Room room) {
-    Booking booking = new Booking(String.valueOf(bookingsList.size() + 1), this, room);
-
+    String bookingId = "B" + (bookingsList.size() + 1);
+    Booking booking = new Booking(bookingId, this, room);
     bookingsList.add(booking);
 
     return booking;
@@ -50,32 +43,33 @@ public class RegisteredUser extends SystemUser {
   public boolean modifyBooking(Booking booking) {
     if (bookingsList.contains(booking)) {
       booking.edit();
+
       return true;
     }
 
-    return false;
+    else
+      return false;
   }
 
   public void cancelBooking(Booking booking) {
-    if (bookingsList.contains(booking)) {
+    if (bookingsList.contains(booking))
       booking.cancel();
-    }
   }
 
   public boolean extendBooking(Booking booking, float duration) {
-    if (bookingsList.contains(booking)) {
+    if (bookingsList.contains(booking))
       return booking.extend(duration);
-    }
 
-    return false;
+    else
+      return false;
   }
 
   public AccountType getAccountType() {
-    return AccountType;
+    return accountType;
   }
 
   public void setAccountType(AccountType accountType) {
-    AccountType = accountType;
+    this.accountType = accountType;
   }
 
   public void addBooking(Booking booking) {

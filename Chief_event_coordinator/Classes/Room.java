@@ -1,13 +1,20 @@
 package Chief_event_coordinator.Classes;
 
+/**
+ * Room
+ *
+ * Extended from the original main-branch version (which only had
+ * roomid) to add a status field. This is a low-risk additive change:
+ * existing constructor/getRoomid/setRoomid signatures are unchanged,
+ * so nothing that already depends on Room breaks.
+ */
 public class Room {
-
     private int roomid;
-    private String status;
+    private RoomStatus status;
 
     public Room(int roomid) {
         this.roomid = roomid;
-        this.status = "Enabled";   // default status
+        this.status = RoomStatus.AVAILABLE;
     }
 
     public int getRoomid() {
@@ -18,11 +25,11 @@ public class Room {
         this.roomid = roomid;
     }
 
-    public String getStatus() {
+    public RoomStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(RoomStatus status) {
         this.status = status;
     }
 }
