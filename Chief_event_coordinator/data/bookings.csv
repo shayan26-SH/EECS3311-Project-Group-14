@@ -1,0 +1,3 @@
+bookingid,roomid,status
+B1,101,CANCELLED
+B2,102,CONFIRMED
