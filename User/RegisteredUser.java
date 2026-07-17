@@ -13,7 +13,7 @@ public class RegisteredUser extends SystemUser {
   public RegisteredUser(String name, String email, String password, AccountType accountType, int studentOrgID) {
     super(email, password, name, accountType);
     this.studentOrgID = studentOrgID;
-    this.bookingsList = new ArrayList<>();
+    this.bookingsList = new ArrayList<Booking>();
   }
 
   public int getOrgID() {
@@ -35,7 +35,6 @@ public class RegisteredUser extends SystemUser {
   public Booking bookRoom(Room room) {
     String bookingId = "B" + (bookingsList.size() + 1);
     Booking booking = new Booking(bookingId, this, room);
-
     bookingsList.add(booking);
 
     return booking;

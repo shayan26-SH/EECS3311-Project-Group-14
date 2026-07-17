@@ -80,13 +80,11 @@ public class Booking implements BookingSubject {
     }
 
     public void edit() {
-        if (status == BookingStatus.CANCELLED) {
+        if (status == BookingStatus.CANCELLED)
             System.out.println("A cancelled booking cannot be edited.");
-        }
 
-        else {
+        else
             System.out.println("Editing booking " + bookingid + ".");
-        }
     }
 
     public boolean cancel() {
@@ -146,7 +144,6 @@ public class Booking implements BookingSubject {
 
     public Room getRoomName() {
         return roomName;
-
     }
 
     public void setRoomName(Room roomName) {
