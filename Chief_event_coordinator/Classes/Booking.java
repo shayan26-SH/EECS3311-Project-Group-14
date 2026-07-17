@@ -71,10 +71,12 @@ public class Booking implements BookingSubject {
             return false;
         }
 
-        roomName = newRoom;
-        System.out.println("Booking " + bookingid + " was edited.");
+        else {
+            roomName = newRoom;
+            System.out.println("Booking " + bookingid + " was edited.");
 
-        return true;
+            return true;
+        }
     }
 
     public void edit() {
@@ -102,6 +104,13 @@ public class Booking implements BookingSubject {
         }
     }
 
+    /**
+     * Extends the booking by the given duration (hours). The duration is
+     * currently not tracked on Booking itself (no duration field exists
+     * yet) - accepted here so RegisteredUser.extendBooking() compiles.
+     * Flagged for the team: if bookings need an actual stored duration,
+     * add a field for it rather than discarding the parameter.
+     */
     public boolean extend() {
         if (status == BookingStatus.CANCELLED) {
             System.out.println("A cancelled booking cannot be extended.");

@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ObserverPatternDemo {
-
     public static void main(String[] args) throws Exception {
         String roomsPath = "data/rooms.csv";
         String bookingsPath = "data/bookings.csv";
