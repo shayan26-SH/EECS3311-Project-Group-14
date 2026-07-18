@@ -34,17 +34,27 @@ public class Administrator {
     }
 
     public void closeRoom(Room room) {
+        closeRoom(room, "Maintenance");
+    }
+
+    public void closeRoom(Room room, String reason) {
+        if (reason == null || reason.trim().isEmpty()) {
+            throw new IllegalArgumentException("A closure reason is required.");
+        }
         room.setStatus(RoomStatus.MAINTENANCE);
+        room.setClosureReason(reason);
         System.out.println("Room " + room.getRoomid() + " closed for maintenance");
     }
 
     public void enableRoom(Room room) {
         room.setStatus(RoomStatus.AVAILABLE);
+        room.setClosureReason(null);
         System.out.println("Room " + room.getRoomid() + " enabled");
     }
 
     public void disableRoom(Room room) {
         room.setStatus(RoomStatus.DISABLED);
+        room.setClosureReason(null);
         System.out.println("Room " + room.getRoomid() + " disabled");
     }
 

@@ -1,4 +1,4 @@
-package Chief_event_coordinator.Demo;
+package Demo;
 
 import AccountType.AccountType;
 import Chief_event_coordinator.Classes.Administrator;
@@ -8,6 +8,11 @@ import Chief_event_coordinator.Classes.RoomStatus;
 import Chief_event_coordinator.Persistence.BookingCSVManager;
 import Chief_event_coordinator.Persistence.RoomCSVManager;
 import User.RegisteredUser;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;

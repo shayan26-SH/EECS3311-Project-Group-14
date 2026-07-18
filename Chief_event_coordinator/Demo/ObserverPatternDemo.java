@@ -12,19 +12,24 @@ import Chief_event_coordinator.Observer.UserNotificationObserver;
 import Chief_event_coordinator.Persistence.BookingCSVManager;
 import Chief_event_coordinator.Persistence.RoomCSVManager;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ObserverPatternDemo {
     public static void main(String[] args) throws Exception {
-        String roomsPath = "data/rooms.csv";
-        String bookingsPath = "data/bookings.csv";
+        String roomsPath = findDataPath("rooms.csv");
+        String bookingsPath = findDataPath("bookings.csv");
 
         RoomCSVManager roomCSVManager = new RoomCSVManager();
         BookingCSVManager bookingCSVManager = new BookingCSVManager();
 
         List<Room> rooms = roomCSVManager.load(roomsPath);
+        if (rooms.isEmpty()) {
+            System.out.println("No rooms found in " + roomsPath);
+            return;
+        }
 
         Map<Integer, Room> roomsById = new HashMap<Integer, Room>();
 
@@ -32,6 +37,10 @@ public class ObserverPatternDemo {
             roomsById.put(r.getRoomid(), r);
 
         List<Booking> bookings = bookingCSVManager.load(bookingsPath, roomsById);
+        if (bookings.isEmpty()) {
+            System.out.println("No bookings found in " + bookingsPath);
+            return;
+        }
 
         Administrator admin = new Administrator("Tazwar", "tazwar@yorku.ca");
 
@@ -72,5 +81,13 @@ public class ObserverPatternDemo {
         roomCSVManager.save(roomsPath, rooms);
         bookingCSVManager.save(bookingsPath, bookings);
         System.out.println("Saved.");
+    }
+
+    private static String findDataPath(String fileName) {
+        File chiefData = new File("Chief_event_coordinator/data/" + fileName);
+        if (chiefData.exists()) {
+            return chiefData.getPath();
+        }
+        return new File("data/" + fileName).getPath();
     }
 }

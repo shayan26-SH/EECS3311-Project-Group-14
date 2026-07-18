@@ -106,6 +106,14 @@ The scheduler supports:
 
 ---
 
+## Facade Pattern
+
+The Facade Pattern is implemented by `BookingFacade`. It gives the system one entry point for adding uniquely identified rooms, enabling or disabling rooms, temporary maintenance closures, occupancy reports, and ID badge verification. The facade coordinates the existing room commands, `Administrator`, `Room`, `OccupancySensor`, `IdBadgeScanner`, and `BadgeVerificationSystem`.
+
+Each `Room` stores its capacity, building, room location, current status, maintenance reason, occupancy sensor, and ID badge scanner. Sensor data is sent to the facade through `receiveOccupancyData` and `receiveBadgeScanData`.
+
+---
+
 ## Technologies Used
 
 - Java

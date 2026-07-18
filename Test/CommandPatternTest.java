@@ -70,15 +70,24 @@ public class CommandPatternTest {
         invoker.setCommand(new ModifyBookingCommand(user, booking));
         invoker.executeCommand();
 
+        booking.confirmDeposit();
+        booking.checkIn();
+
         // Extend Booking
         invoker.setCommand(new ExtendBookingCommand(user, booking, 2.0f));
         invoker.executeCommand();
 
-        // Cancel Booking
-        invoker.setCommand(new CancelBookingCommand(user, booking));
+        Room cancellationRoom = new Room(103);
+        invoker.setCommand(new BookRoomCommand(user, cancellationRoom));
+        invoker.executeCommand();
+        Booking bookingToCancel = user.viewBookings().get(1);
+
+        // Cancel Booking before it starts
+        invoker.setCommand(new CancelBookingCommand(user, bookingToCancel));
         invoker.executeCommand();
 
         System.out.println("--------------------------------");
-        System.out.println("Booking Status: " + booking.getStatus());
+        System.out.println("Extended Booking Status: " + booking.getStatus());
+        System.out.println("Cancelled Booking Status: " + bookingToCancel.getStatus());
     }
 }

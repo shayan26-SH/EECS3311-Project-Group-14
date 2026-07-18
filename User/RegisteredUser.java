@@ -13,6 +13,7 @@ public class RegisteredUser extends SystemUser {
   public RegisteredUser(String name, String email, String password, AccountType accountType, int studentOrgID) {
     super(email, password, name, accountType);
     this.studentOrgID = studentOrgID;
+    this.accountType = accountType;
     this.bookingsList = new ArrayList<Booking>();
   }
 
@@ -70,6 +71,7 @@ public class RegisteredUser extends SystemUser {
 
   public void setAccountType(AccountType accountType) {
     this.accountType = accountType;
+    setType(accountType);
   }
 
   public void addBooking(Booking booking) {

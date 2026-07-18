@@ -1,4 +1,4 @@
-package Chief_event_coordinator.Demo;
+package Demo;
 
 import AccountType.AccountType;
 import Chief_event_coordinator.Abstract_Factory.RoomAdminFactory;

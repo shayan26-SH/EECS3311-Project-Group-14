@@ -21,6 +21,7 @@ public final class BookingStateFactory {
 
     public static BookingState fromStatus(BookingStatus status) {
         switch (status) {
+            case ACTIVE:
             case PENDING:
                 return new PendingState();
             case CONFIRMED:

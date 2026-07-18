@@ -35,21 +35,24 @@ public class Booking implements BookingSubject {
     private RegisteredUser registeredUser;
     private Room roomName;
     private BookingState state;
-    private final List<BookingObserver> observers = new ArrayList<>();
-    private BookingStatus status;
     private final List<BookingObserver> observers = new ArrayList<BookingObserver>();
 
     public Booking(String bookingid, Room roomName) {
-        this.bookingid = bookingid;
-        this.roomName = roomName;
-        this.status = BookingStatus.ACTIVE;
+        this(bookingid, null, roomName);
     }
 
     public Booking(String bookingid, RegisteredUser registeredUser, Room roomName) {
+        if (bookingid == null || bookingid.trim().isEmpty()) {
+            throw new IllegalArgumentException("Booking id is required.");
+        }
+        if (roomName == null) {
+            throw new IllegalArgumentException("Room is required.");
+        }
+
         this.bookingid = bookingid;
         this.registeredUser = registeredUser;
         this.roomName = roomName;
-        this.status = BookingStatus.ACTIVE;
+        this.state = new PendingState();
     }
 
     // ----- Observer role (unchanged contract) -----
@@ -88,11 +91,6 @@ public class Booking implements BookingSubject {
         state.markNoShow(this);
     }
 
-    /** Req8: cancel before start time (PENDING/CONFIRMED -> CANCELLED). */
-    public void cancel() {
-        state.cancel(this);
-    }
-
     /** Req9: extend before expiry if room is free (CHECKED_IN/EXTENDED -> EXTENDED). */
     public void extend() {
         state.extend(this);
@@ -103,6 +101,10 @@ public class Booking implements BookingSubject {
      * BookingState classes; this is the one place where State and Observer meet.
      */
     public void changeState(BookingState newState) {
+        if (newState == null) {
+            throw new IllegalArgumentException("Booking state is required.");
+        }
+
         BookingStatus oldStatus = this.state.getStatus();
         this.state = newState;
         notifyObservers(oldStatus, newState.getStatus());
@@ -132,7 +134,7 @@ public class Booking implements BookingSubject {
     // --- Business methods (Req8, Req9) ---
 
     public boolean edit(Room newRoom) {
-        if (status == BookingStatus.CANCELLED) {
+        if (getStatus() == BookingStatus.CANCELLED) {
             System.out.println("A cancelled booking cannot be edited.");
 
             return false;
@@ -153,7 +155,7 @@ public class Booking implements BookingSubject {
     }
 
     public void edit() {
-        if (status == BookingStatus.CANCELLED)
+        if (getStatus() == BookingStatus.CANCELLED)
             System.out.println("A cancelled booking cannot be edited.");
 
         else
@@ -161,14 +163,14 @@ public class Booking implements BookingSubject {
     }
 
     public boolean cancel() {
-        if (status == BookingStatus.CANCELLED) {
+        if (getStatus() == BookingStatus.CANCELLED) {
             System.out.println("Booking " + bookingid + " is already cancelled.");
 
             return false;
         }
 
         else {
-            setStatus(BookingStatus.CANCELLED);
+            state.cancel(this);
             System.out.println("Booking " + bookingid + " was cancelled.");
 
             return true;
@@ -183,14 +185,18 @@ public class Booking implements BookingSubject {
      * add a field for it rather than discarding the parameter.
      */
     public boolean extend(float duration) {
-        if (status == BookingStatus.CANCELLED) {
+        if (duration <= 0) {
+            throw new IllegalArgumentException("Extension duration must be positive.");
+        }
+
+        if (getStatus() == BookingStatus.CANCELLED) {
             System.out.println("A cancelled booking cannot be extended.");
 
             return false;
         }
 
         else {
-            setStatus(BookingStatus.EXTENDED);
+            state.extend(this);
             System.out.println("Booking " + bookingid + " was extended by " + duration + " hour(s).");
 
             return true;
