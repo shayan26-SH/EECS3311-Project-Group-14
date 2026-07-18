@@ -204,13 +204,14 @@ git checkout <branch-name>
 To run the GUI, please go to the Demo folder after downloading everything:
 ```bash
 
-javac -d . -cp ".;Chief_event_coordinator\lib\javacsv.jar" Demo\RoomSchedulerGUI.java
+$out = ".codex-validation\bin"
+New-Item -ItemType Directory -Force -Path $out | Out-Null
+
+javac --release 21 -cp ".;Chief_event_coordinator\lib\javacsv.jar" -d $out AccountType\AccountType.java User\*.java Chief_event_coordinator\ChiefEventCoordinator.java Chief_event_coordinator\Classes\*.java Chief_event_coordinator\Abstract_Factory\*.java Chief_event_coordinator\Observer\*.java Chief_event_coordinator\State\*.java Chief_event_coordinator\Command\*.java Chief_event_coordinator\Persistence\*.java Chief_event_coordinator\Demo\*.java Demo\*.java StrategyPattern\src\model\*.java Test\*.java
+
+java -cp ".codex-validation\bin;Chief_event_coordinator\lib\javacsv.jar" Demo.RoomSchedulerGUI
 ```
 
-```bash
-java -cp ".;Chief_event_coordinator\lib\javacsv.jar" Chief_event_coordinator.Demo.RoomSchedulerGUI
-Picked up JAVA_TOOL_OPTIONS: -Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8
-```
 
 Each branch contains its own commits, implementation files, and project progress.
 
