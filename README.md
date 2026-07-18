@@ -123,7 +123,9 @@ This project uses a payment strategy model to handle those options. The `Payment
 
 ## Facade Pattern
 
-The Facade Pattern is used for booking through `BookingFacade`. This class provides one simple interface for adding rooms, creating bookings, cancelling bookings, viewing bookings, and updating room availability. Code that needs to manage bookings can call the facade instead of directly coordinating `Administrator`, `Room`, and `Booking` objects.
+The Facade Pattern is implemented by `BookingFacade`. It provides one system entry point for adding uniquely identified rooms, enabling/disabling rooms, temporary maintenance closures, bookings, occupancy reports, and ID badge verification. Callers use the facade instead of coordinating `Administrator`, `Room`, `OccupancySensor`, `IdBadgeScanner`, and `BadgeVerificationSystem` directly.
+
+Each `Room` stores its capacity, building, room location, current status, maintenance reason, occupancy sensor, and ID badge scanner. Sensor and badge data is sent through the facade using `receiveOccupancyData` and `receiveBadgeScanData`.
 
 ---
 

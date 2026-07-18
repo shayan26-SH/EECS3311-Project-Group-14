@@ -3,16 +3,25 @@ package Chief_event_coordinator.Classes;
 import java.util.HashMap;
 
 public class BookingFacade {
-    private Administrator administrator;
-    private HashMap<Integer, Room> rooms;
-    private HashMap<String, Booking> bookings;
+    private final Administrator administrator;
+    private final HashMap<Integer, Room> rooms;
+    private final HashMap<String, Booking> bookings;
+    private final BadgeVerificationSystem badgeVerificationSystem;
 
     public BookingFacade(Administrator administrator) {
+        this(administrator, new BadgeVerificationSystem());
+    }
+
+    public BookingFacade(Administrator administrator, BadgeVerificationSystem badgeVerificationSystem) {
         if (administrator == null) {
             throw new IllegalArgumentException("Administrator is required.");
         }
+        if (badgeVerificationSystem == null) {
+            throw new IllegalArgumentException("Badge verification system is required.");
+        }
 
         this.administrator = administrator;
+        this.badgeVerificationSystem = badgeVerificationSystem;
         this.rooms = new HashMap<>();
         this.bookings = new HashMap<>();
     }
@@ -20,6 +29,9 @@ public class BookingFacade {
     public void addRoom(Room room) {
         if (room == null) {
             throw new IllegalArgumentException("Room is required.");
+        }
+        if (rooms.containsKey(room.getRoomid())) {
+            throw new IllegalArgumentException("Room id already exists.");
         }
 
         rooms.put(room.getRoomid(), room);
@@ -35,13 +47,13 @@ public class BookingFacade {
         }
 
         Room room = getRoom(roomid);
-        if (!"Enabled".equals(room.getStatus())) {
+        if (!Room.ENABLED.equals(room.getStatus())) {
             throw new IllegalStateException("Room " + roomid + " is not available.");
         }
 
         Booking booking = new Booking(bookingid, room);
         bookings.put(bookingid, booking);
-        room.setStatus("Booked");
+        room.setStatus(Room.BOOKED);
         System.out.println("Booking " + bookingid + " created for room " + roomid);
         return booking;
     }
@@ -52,7 +64,9 @@ public class BookingFacade {
             return false;
         }
 
-        booking.getRoomName().setStatus("Enabled");
+        if (Room.BOOKED.equals(booking.getRoomName().getStatus())) {
+            booking.getRoomName().setStatus(Room.ENABLED);
+        }
         System.out.println("Booking " + bookingid + " cancelled");
         return true;
     }
@@ -75,6 +89,44 @@ public class BookingFacade {
 
     public void closeRoom(int roomid) {
         administrator.closeRoom(getRoom(roomid));
+    }
+
+    public void closeRoomForMaintenance(int roomid, String reason) {
+        administrator.closeRoom(getRoom(roomid), reason);
+    }
+
+    public void authorizeBadge(String badgeId) {
+        badgeVerificationSystem.authorizeBadge(badgeId);
+    }
+
+    public void revokeBadge(String badgeId) {
+        badgeVerificationSystem.revokeBadge(badgeId);
+    }
+
+    public int receiveOccupancyData(int roomid, int occupantCount) {
+        Room room = getRoom(roomid);
+        return room.getOccupancySensor().detectOccupancy(occupantCount);
+    }
+
+    public boolean receiveBadgeScanData(int roomid, String badgeId) {
+        Room room = getRoom(roomid);
+        return room.getIdBadgeScanner().scanBadge(badgeId, badgeVerificationSystem);
+    }
+
+    public int getOccupancyCount(int roomid) {
+        return getRoom(roomid).getOccupancySensor().getOccupantCount();
+    }
+
+    public String getLastScannedBadgeId(int roomid) {
+        return getRoom(roomid).getIdBadgeScanner().getLastScannedBadgeId();
+    }
+
+    public boolean wasLastBadgeVerified(int roomid) {
+        return getRoom(roomid).getIdBadgeScanner().wasLastBadgeVerified();
+    }
+
+    public Room viewRoom(int roomid) {
+        return getRoom(roomid);
     }
 
     public void viewRoomStatus(int roomid) {
