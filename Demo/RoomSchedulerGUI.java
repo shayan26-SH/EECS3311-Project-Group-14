@@ -9,6 +9,11 @@ import Chief_event_coordinator.Classes.Room;
 import Chief_event_coordinator.Classes.RoomStatus;
 import Chief_event_coordinator.Persistence.BookingCSVManager;
 import Chief_event_coordinator.Persistence.RoomCSVManager;
+import Chief_event_coordinator.Observer.AdminDashboardObserver;
+import Chief_event_coordinator.Observer.PaymentNotificationObserver;
+import Chief_event_coordinator.Observer.RoomAvailabilityObserver;
+import Chief_event_coordinator.Observer.StubPayment;
+import Chief_event_coordinator.Observer.UserNotificationObserver;
 import User.RegisteredUser;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -627,6 +632,10 @@ public class RoomSchedulerGUI extends JFrame {
 
       String bookingId = nextBookingId();
       Booking booking = new Booking(bookingId, registeredUser, room);
+      booking.addObserver(new PaymentNotificationObserver(new StubPayment()));
+      booking.addObserver(new RoomAvailabilityObserver(room));
+      booking.addObserver(new UserNotificationObserver(email));
+      booking.addObserver(new AdminDashboardObserver(admin));
       registeredUser.addBooking(booking);
       bookings.add(booking);
       bookingDetails.put(
@@ -979,7 +988,7 @@ public class RoomSchedulerGUI extends JFrame {
       BookingDetails details = bookingDetails.get(booking.getBookingid());
       String text = formatBooking(booking, details);
       adminBookingModel.addElement(text);
-      if (registeredUser != null && ownsBooking(details)) {
+      if (registeredUser != null && ownsBooking(details) && !isCancelled(booking)) {
         userBookingModel.addElement(text);
       }
     }
