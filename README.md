@@ -193,6 +193,17 @@ Switch to a specific branch:
 git checkout <branch-name>
 ```
 
+To run the GUI, please go to the Demo folder after downloading everything:
+```bash
+
+javac -d . -cp ".;Chief_event_coordinator\lib\javacsv.jar" Demo\RoomSchedulerGUI.java
+```
+
+```bash
+java -cp ".;Chief_event_coordinator\lib\javacsv.jar" Chief_event_coordinator.Demo.RoomSchedulerGUI
+Picked up JAVA_TOOL_OPTIONS: -Dstdout.encoding=UTF-8 -Dstderr.encoding=UTF-8
+```
+
 Each branch contains its own commits, implementation files, and project progress.
 
 > **Note:** This deliverable primarily focuses on software analysis and UML design. Executable Java source files may be located in individual branches rather than the main branch.

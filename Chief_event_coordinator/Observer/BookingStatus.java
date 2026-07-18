@@ -17,6 +17,7 @@ package Chief_event_coordinator.Observer;
  * "what did the booking change to" from, so it can notify observers.
  */
 public enum BookingStatus {
+    ACTIVE,
     PENDING,
     CONFIRMED,
     CANCELLED,

@@ -55,6 +55,6 @@ public class Administrator {
     public HashMap<Integer, Booking> viewBookings() {
         System.out.println("Viewing all bookings");
 
-        return new HashMap<>();
+        return new HashMap<Integer, Booking>();
     }
 }

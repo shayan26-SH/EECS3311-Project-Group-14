@@ -6,6 +6,7 @@ import Chief_event_coordinator.Observer.BookingSubject;
 import Chief_event_coordinator.State.BookingState;
 import Chief_event_coordinator.State.BookingStateFactory;
 import Chief_event_coordinator.State.PendingState;
+import User.RegisteredUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,33 +32,28 @@ import java.util.List;
  */
 public class Booking implements BookingSubject {
     private String bookingid;
+    private RegisteredUser registeredUser;
     private Room roomName;
     private BookingState state;
     private final List<BookingObserver> observers = new ArrayList<>();
+    private BookingStatus status;
+    private final List<BookingObserver> observers = new ArrayList<BookingObserver>();
 
     public Booking(String bookingid, Room roomName) {
         this.bookingid = bookingid;
         this.roomName = roomName;
-        this.state = new PendingState(); // every booking starts PENDING (Req3)
+        this.status = BookingStatus.ACTIVE;
     }
 
-    public String getBookingid() {
-        return bookingid;
-    }
-
-    public void setBookingid(String bookingid) {
+    public Booking(String bookingid, RegisteredUser registeredUser, Room roomName) {
         this.bookingid = bookingid;
-    }
-
-    public Room getRoomName() {
-        return roomName;
-    }
-
-    public void setRoomName(Room roomName) {
+        this.registeredUser = registeredUser;
         this.roomName = roomName;
+        this.status = BookingStatus.ACTIVE;
     }
 
     // ----- Observer role (unchanged contract) -----
+    // --- BookingSubject ---
 
     @Override
     public void addObserver(BookingObserver observer) {
@@ -131,5 +127,99 @@ public class Booking implements BookingSubject {
      */
     public void setStatus(BookingStatus newStatus) {
         changeState(BookingStateFactory.fromStatus(newStatus));
+    }
+
+    // --- Business methods (Req8, Req9) ---
+
+    public boolean edit(Room newRoom) {
+        if (status == BookingStatus.CANCELLED) {
+            System.out.println("A cancelled booking cannot be edited.");
+
+            return false;
+        }
+
+        if (newRoom == null) {
+            System.out.println("The new room cannot be null.");
+
+            return false;
+        }
+
+        else {
+            roomName = newRoom;
+            System.out.println("Booking " + bookingid + " was edited.");
+
+            return true;
+        }
+    }
+
+    public void edit() {
+        if (status == BookingStatus.CANCELLED)
+            System.out.println("A cancelled booking cannot be edited.");
+
+        else
+            System.out.println("Editing booking " + bookingid + ".");
+    }
+
+    public boolean cancel() {
+        if (status == BookingStatus.CANCELLED) {
+            System.out.println("Booking " + bookingid + " is already cancelled.");
+
+            return false;
+        }
+
+        else {
+            setStatus(BookingStatus.CANCELLED);
+            System.out.println("Booking " + bookingid + " was cancelled.");
+
+            return true;
+        }
+    }
+
+    /**
+     * Extends the booking by the given duration (hours). The duration is
+     * currently not tracked on Booking itself (no duration field exists
+     * yet) - accepted here so RegisteredUser.extendBooking() compiles.
+     * Flagged for the team: if bookings need an actual stored duration,
+     * add a field for it rather than discarding the parameter.
+     */
+    public boolean extend(float duration) {
+        if (status == BookingStatus.CANCELLED) {
+            System.out.println("A cancelled booking cannot be extended.");
+
+            return false;
+        }
+
+        else {
+            setStatus(BookingStatus.EXTENDED);
+            System.out.println("Booking " + bookingid + " was extended by " + duration + " hour(s).");
+
+            return true;
+        }
+    }
+
+    // --- Getters/setters ---
+
+    public String getBookingid() {
+        return bookingid;
+    }
+
+    public void setBookingid(String bookingid) {
+        this.bookingid = bookingid;
+    }
+
+    public RegisteredUser getRegisteredUser() {
+        return registeredUser;
+    }
+
+    public void setRegisteredUser(RegisteredUser registeredUser) {
+        this.registeredUser = registeredUser;
+    }
+
+    public Room getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(Room roomName) {
+        this.roomName = roomName;
     }
 }
