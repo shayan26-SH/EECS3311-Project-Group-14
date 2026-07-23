@@ -106,6 +106,14 @@ The scheduler supports:
 
 ---
 
+## Facade Pattern
+
+The Facade Pattern is implemented by `BookingFacade`. It gives the system one entry point for adding uniquely identified rooms, enabling or disabling rooms, temporary maintenance closures, occupancy reports, and ID badge verification. The facade coordinates the existing room commands, `Administrator`, `Room`, `OccupancySensor`, `IdBadgeScanner`, and `BadgeVerificationSystem`.
+
+Each `Room` stores its capacity, building, room location, current status, maintenance reason, occupancy sensor, and ID badge scanner. Sensor data is sent to the facade through `receiveOccupancyData` and `receiveBadgeScanData`.
+
+---
+
 ## Technologies Used
 
 - Java
@@ -192,6 +200,26 @@ Switch to a specific branch:
 ```bash
 git checkout <branch-name>
 ```
+
+To run the GUI, please go to the Demo folder after downloading everything:
+```bash
+
+$out = ".codex-validation\bin"
+New-Item -ItemType Directory -Force -Path $out | Out-Null
+
+javac --release 21 -cp ".;Chief_event_coordinator\lib\javacsv.jar" -d $out AccountType\AccountType.java User\*.java Chief_event_coordinator\ChiefEventCoordinator.java Chief_event_coordinator\Classes\*.java Chief_event_coordinator\Abstract_Factory\*.java Chief_event_coordinator\Observer\*.java Chief_event_coordinator\State\*.java Chief_event_coordinator\Command\*.java Chief_event_coordinator\Persistence\*.java Chief_event_coordinator\Demo\*.java Demo\*.java StrategyPattern\src\model\*.java Test\*.java
+
+java -cp ".codex-validation\bin;Chief_event_coordinator\lib\javacsv.jar" Demo.RoomSchedulerGUI
+```
+But for the users on Java 26 please run this command:
+``` bash
+$out = ".codex-validation\bin"
+New-Item -ItemType Directory -Force -Path $out | Out-Null
+javac -cp ".;Chief_event_coordinator\lib\javacsv.jar" -d $out AccountType\AccountType.java User\.java Chief_event_coordinator\ChiefEventCoordinator.java Chief_event_coordinator\Classes\.java Chief_event_coordinator\Abstract_Factory\.java Chief_event_coordinator\Observer\.java Chief_event_coordinator\State\.java Chief_event_coordinator\Command\.java Chief_event_coordinator\Persistence\.java Chief_event_coordinator\Demo\.java Demo\.java StrategyPattern\src\model\.java Test\*.java
+
+java -cp ".codex-validation\bin;Chief_event_coordinator\lib\javacsv.jar" Demo.RoomSchedulerGUI
+```
+
 
 Each branch contains its own commits, implementation files, and project progress.
 

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="StrategyPattern/src/|StrategyPattern/src/**|StrategyPattern/bin/|StrategyPattern/bin/**|**/*.class" kind="src" path=""/>
+	<classpathentry kind="src" path="StrategyPattern/src"/>
+	<classpathentry kind="lib" path="Chief_event_coordinator/lib/javacsv.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path=".codex-validation/bin"/>
+</classpath>

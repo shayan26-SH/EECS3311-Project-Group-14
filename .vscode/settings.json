@@ -1,0 +1,10 @@
+{
+  "java.project.sourcePaths": [
+    ".",
+    "StrategyPattern/src"
+  ],
+  "java.project.referencedLibraries": [
+    "Chief_event_coordinator/lib/*.jar"
+  ],
+  "java.project.outputPath": ".codex-validation/bin"
+}
