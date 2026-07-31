@@ -1,3 +1,6 @@
+package Randoop;
+
+
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -34,7 +37,7 @@ public class ErrorTest0 {
         if (debug)
             System.out.format("%n%s%n", "ErrorTest0.test2");
         Chief_event_coordinator.Classes.RegressionTest0 regressionTest0_0 = new Chief_event_coordinator.Classes.RegressionTest0();
-        regressionTest0_0.test4();
+        regressionTest0_0.test004();
         boolean[] booleanArray7 = new boolean[] { false, false, true, false, false };
         boolean[] booleanArray9 = new boolean[] { true };
         // during test generation this statement threw an exception of type java.lang.AssertionError in error
@@ -46,8 +49,8 @@ public class ErrorTest0 {
         if (debug)
             System.out.format("%n%s%n", "ErrorTest0.test3");
         Chief_event_coordinator.Classes.RegressionTest0 regressionTest0_0 = new Chief_event_coordinator.Classes.RegressionTest0();
-        regressionTest0_0.test5();
-        regressionTest0_0.test5();
+        regressionTest0_0.test005();
+        regressionTest0_0.test005();
         boolean[] booleanArray9 = new boolean[] { false, true, false, false, false, true };
         boolean[] booleanArray13 = new boolean[] { false, false, false };
         // during test generation this statement threw an exception of type java.lang.AssertionError in error
