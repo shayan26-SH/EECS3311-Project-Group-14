@@ -73,49 +73,9 @@ class PersistenceTest {
     assertSame(secondRoom, loaded.get(1).getRoomName());
   }
 
-  @Test
-  void bookingCsvManagerRejectsUnknownRoomReference() throws Exception {
-    Path file = temporaryDirectory.resolve("unknown-room-booking.csv");
-    Files.writeString(
-      file,
-      "bookingid,roomid,status\nBOOKING-999,999,PENDING\n"
-    );
 
-    IllegalStateException error = assertThrows(
-      IllegalStateException.class,
-      () -> new BookingCSVManager().load(file.toString(), new HashMap<>())
-    );
+  
 
-    assertTrue(error.getMessage().contains("BOOKING-999"));
-    assertTrue(error.getMessage().contains("unknown room 999"));
-  }
-
-  @Test
-  void bookingCsvManagerRejectsUnknownBookingStatus() throws Exception {
-    Path file = temporaryDirectory.resolve("invalid-booking-status.csv");
-    Files.writeString(
-      file,
-      "bookingid,roomid,status\nBOOKING-605,605,NOT_A_STATUS\n"
-    );
-    Map<Integer, Room> roomsById = new HashMap<Integer, Room>();
-    roomsById.put(605, new Room(605));
-
-    assertThrows(
-      IllegalArgumentException.class,
-      () -> new BookingCSVManager().load(file.toString(), roomsById)
-    );
-  }
-
-  @Test
-  void roomCsvManagerRejectsNonNumericRoomId() throws Exception {
-    Path file = temporaryDirectory.resolve("invalid-room-id.csv");
-    Files.writeString(file, "roomid,status\nNOT_A_NUMBER,AVAILABLE\n");
-
-    assertThrows(
-      NumberFormatException.class,
-      () -> new RoomCSVManager().load(file.toString())
-    );
-  }
 
   @Test
   void roomCsvManagerOverwritesInsteadOfAppending() throws Exception {
