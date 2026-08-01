@@ -6674,4 +6674,3 @@ public class RegressionTest0 {
         regressionTest0_0.test002();
     }
 }
-

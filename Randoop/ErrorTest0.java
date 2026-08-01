@@ -69,4 +69,3 @@ public class ErrorTest0 {
         regressionTest0_0.assertBooleanArrayEquals(booleanArray7, booleanArray10);
     }
 }
-

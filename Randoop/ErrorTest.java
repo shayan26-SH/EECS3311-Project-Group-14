@@ -7,4 +7,3 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({ ErrorTest0.class })
 public class ErrorTest {
 }
-
