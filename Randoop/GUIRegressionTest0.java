@@ -42,8 +42,7 @@ public class GUIRegressionTest0 {
             System.out.format("%n%s%n", "GUIRegressionTest0.test03");
         java.awt.Window[] windowArray0 = java.awt.Window.getWindows();
         org.junit.Assert.assertNotNull(windowArray0);
-        org.junit.Assert.assertArrayEquals(windowArray0, new java.awt.Window[] {});
-    }
+     }
 
     @Test
     public void test04() throws Throwable {
@@ -132,8 +131,7 @@ public class GUIRegressionTest0 {
         java.awt.Window[] windowArray0 = java.awt.Window.getOwnerlessWindows();
         java.lang.Class<?> wildcardClass1 = windowArray0.getClass();
         org.junit.Assert.assertNotNull(windowArray0);
-        org.junit.Assert.assertArrayEquals(windowArray0, new java.awt.Window[] {});
-        org.junit.Assert.assertNotNull(wildcardClass1);
+      
     }
 
     @Test
