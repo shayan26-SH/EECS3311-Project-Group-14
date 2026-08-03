@@ -4,7 +4,8 @@
     "StrategyPattern/src"
   ],
   "java.project.referencedLibraries": [
-    "Chief_event_coordinator/lib/*.jar"
+    "Chief_event_coordinator/lib/javacsv.jar",
+    "Chief_event_coordinator/lib/junit-platform-console-standalone-6.1.0.jar"
   ],
   "java.project.outputPath": ".codex-validation/bin"
 }
