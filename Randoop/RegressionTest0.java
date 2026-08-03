@@ -1,4 +1,4 @@
-package Randoop;
+package Chief_event_coordinator.Classes;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;

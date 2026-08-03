@@ -20,7 +20,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-class PersistenceTest {
+public class PersistenceTest {
 
   @TempDir
   Path temporaryDirectory;

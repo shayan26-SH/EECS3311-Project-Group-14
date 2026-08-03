@@ -37,7 +37,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.jupiter.api.Test;
 
-class CoreDomainTest {
+public class CoreDomainTest {
 
   @Test
   void accountTypeAndSystemUserExposeAndValidateTheirData() {

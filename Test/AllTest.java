@@ -3,6 +3,11 @@ package Test;
 import org.junit.platform.suite.api.SelectClasses;
 import org.junit.platform.suite.api.Suite;
 
+import AI_TestCases.CoreDomainTest;
+import AI_TestCases.BookingStateObserverTest;
+import AI_TestCases.PaymentStrategyTest;
+import AI_TestCases.PersistenceTest;
+
 /**
  * Runs the complete JUnit 5 test suite for the conference-room scheduler.
  *

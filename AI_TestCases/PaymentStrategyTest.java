@@ -19,7 +19,7 @@ import model.PaymentUser;
 import model.TimeSlot;
 import org.junit.jupiter.api.Test;
 
-class PaymentStrategyTest {
+public class PaymentStrategyTest {
 
   @Test
   void strategyModelObjectsValidateAndExposeTheirData() {
