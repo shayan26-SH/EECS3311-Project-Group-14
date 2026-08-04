@@ -4,17 +4,14 @@
 	<classpathentry kind="src" path="Randoop/model"/>
 	<classpathentry kind="src" path="StrategyPattern/src"/>
 	<classpathentry kind="lib" path="Chief_event_coordinator/lib/javacsv.jar"/>
- HEAD
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="lib" path="/Users/hasitamandaleeka/git/EECS3311-Project-Group-14/Randoop/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="/Users/hasitamandaleeka/git/EECS3311-Project-Group-14/Randoop/junit-4.13.2.jar"/>
+	<classpathentry kind="lib" path="Chief_event_coordinator/lib/junit-platform-console-standalone-6.1.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry kind="lib" path="/Users/hasitamandaleeka/git/EECS3311-Project-Group-14/Randoop/hamcrest-core-1.3.jar"/>
-	<classpathentry kind="lib" path="/Users/hasitamandaleeka/git/EECS3311-Project-Group-14/Randoop/junit-4.13.2.jar"/>
-	<classpathentry kind="lib" path="Chief_event_coordinator/lib/junit-platform-console-standalone-6.1.0.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
- 27e7adf3ccd4e9432aa3d11429f6ebd1ecfc744b
 	<classpathentry kind="output" path=".codex-validation/bin"/>
 </classpath>
