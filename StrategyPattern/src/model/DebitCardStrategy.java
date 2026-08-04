@@ -12,7 +12,7 @@ public class DebitCardStrategy implements PaymentStrategy {
     	if (String.valueOf(expiryDate).length() != 4) {
     	    throw new IllegalArgumentException("Expiry Date must have 4 digits.");
     	}
-    	if (String.valueOf(expiryDate).length() != 4) {
+    	if (String.valueOf(cvv).length() != 3) {
     	    throw new IllegalArgumentException("CVV must have 3 digits.");
     	}
         this.cardNum = cardNum;
