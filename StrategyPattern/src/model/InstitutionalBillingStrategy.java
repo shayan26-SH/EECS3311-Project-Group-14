@@ -2,10 +2,19 @@ package model;
 
 public class InstitutionalBillingStrategy implements PaymentStrategy {
     private String institutionName;
-    private int accountNumber;
+    private long accountNumber;
     private String accountEmail;
 
-    public InstitutionalBillingStrategy(String institutionName, int accountNumber, String accountEmail) {
+    public InstitutionalBillingStrategy(String institutionName, long accountNumber, String accountEmail) {
+    	if (String.valueOf(accountNumber).length() < 7) {
+    	    throw new IllegalArgumentException("Account number must contain at least 7 digits.");
+    	}
+    	if (institutionName == null || institutionName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Inst. name is required.");
+        }
+    	if (accountEmail == null || accountEmail.trim().isEmpty()) {
+            throw new IllegalArgumentException("Account Email is required.");
+        }
         this.institutionName = institutionName;
         this.accountNumber = accountNumber;
         this.accountEmail = accountEmail;
