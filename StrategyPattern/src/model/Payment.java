@@ -1,6 +1,8 @@
 package model;
 
 import java.time.Duration;
+import java.util.HashSet;
+import java.util.Set;
 
 //Context class
 
@@ -10,8 +12,14 @@ public class Payment {
     private float totalAmount;
     private PaymentStatus status;
     private PaymentStrategy strategy;  
+    private static final Set<Integer> IDlist = new HashSet<>();
 
     public Payment(int id, Booking booking, PaymentStrategy strategy) {
+    	if (IDlist.contains(id)) {
+            throw new IllegalArgumentException("Payment id already exists.");
+        }
+        IDlist.add(id);
+        
         this.id = id;
         this.booking = booking;
         this.strategy = strategy;
@@ -57,5 +65,9 @@ public class Payment {
 
     public PaymentStatus getStatus() {
         return status;
+    }
+    
+    public float getTotalAmount() {
+        return totalAmount;
     }
 }
