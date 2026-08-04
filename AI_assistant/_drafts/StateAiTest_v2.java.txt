@@ -1,0 +1,125 @@
+package AI_assistant._drafts;
+
+// ============================================================================
+// FIRST-DRAFT AI OUTPUT (v1) — kept verbatim for the D3 report.
+// This is the raw suite the AI produced from Prompt #1 (see AI_TEST_REPORT.md),
+// BEFORE any human review. It intentionally still contains the AI's mistakes
+// so the report can show which tests failed to compile / failed at runtime /
+// had wrong assertions. Do NOT "fix" this file — the corrected suite lives in
+// AI_assistant/state/StateAiTest.java.
+// ============================================================================
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import Chief_event_coordinator.Classes.Booking;
+import Chief_event_coordinator.Classes.Room;
+import Chief_event_coordinator.Observer.BookingStatus;
+import Chief_event_coordinator.State.BookingStateFactory;
+import Chief_event_coordinator.State.CancelledState;
+import Chief_event_coordinator.State.CheckedInState;
+import Chief_event_coordinator.State.ConfirmedState;
+import Chief_event_coordinator.State.ExtendedState;
+import Chief_event_coordinator.State.IllegalBookingTransitionException;
+import Chief_event_coordinator.State.NoShowState;
+import Chief_event_coordinator.State.PendingState;
+
+/**
+ * AI-generated unit tests for the Booking State pattern.
+ */
+public class StateAiTest_v2 {
+
+    @Test
+    public void testPendingConfirmDeposit() {
+        Booking booking = new Booking("b1", new Room(1));
+        booking.confirmDeposit();
+        assertTrue(booking.getState() instanceof ConfirmedState);
+    }
+
+    @Test
+    public void testPendingCancel() {
+        Booking booking = new Booking("b1", new Room(1));
+        booking.cancel();
+        assertEquals(BookingStatus.CANCELLED, booking.getStatus());
+    }
+
+    @Test
+    public void testPendingMarkNoShow() {
+        Booking booking = new Booking("b1", new Room(1));
+        booking.markNoShow();
+        assertEquals(BookingStatus.NO_SHOW, booking.getStatus());
+    }
+
+    @Test
+    public void testConfirmedCheckIn() {
+        Booking booking = new Booking("b1", new Room(1));
+        booking.confirmDeposit();
+        booking.checkIn();
+        assertTrue(booking.getState() instanceof CheckedInState);
+    }
+
+    @Test
+    public void testCheckedInCanCancel() {
+        Booking booking = new Booking("b1", new Room(1));
+        booking.confirmDeposit();
+        booking.checkIn();
+        booking.cancel();
+        assertEquals(BookingStatus.CANCELLED, booking.getStatus());
+    }
+
+    @Test
+    public void testExtendedCannotExtendAgain() {
+        Booking booking = new Booking("b1", new Room(1));
+        booking.confirmDeposit();
+        booking.checkIn();
+        booking.extend();
+        assertThrows(IllegalBookingTransitionException.class, () -> booking.extend());
+    }
+
+    @Test
+    public void testPendingCheckInRejected() {
+        PendingState state = new PendingState();
+        Room room = new Room(1);
+        Booking booking = new Booking("b1", room);
+        IllegalBookingTransitionException e = assertThrows(
+                IllegalBookingTransitionException.class, () -> state.checkIn(booking));
+        assertEquals("Cannot checkIn a booking in state PENDING.", e.getMessage());
+    }
+
+    @Test
+    public void testCancelledIsTerminal() {
+        CancelledState state = new CancelledState();
+        assertThrows(IllegalBookingTransitionException.class,
+                () -> state.confirmDeposit(null));
+    }
+
+    @Test
+    public void testNoShowIsTerminal() {
+        NoShowState state = new NoShowState();
+        assertThrows(IllegalBookingTransitionException.class, () -> state.extend(null));
+    }
+
+    @Test
+    public void testFactoryPending() {
+        assertTrue(BookingStateFactory.fromStatus(BookingStatus.PENDING) instanceof PendingState);
+    }
+
+    @Test
+    public void testFactoryConfirmed() {
+        assertTrue(BookingStateFactory.fromStatus(BookingStatus.CONFIRMED) instanceof ConfirmedState);
+    }
+
+    @Test
+    public void testFactoryExtended() {
+        assertTrue(BookingStateFactory.fromStatus(BookingStatus.EXTENDED) instanceof ExtendedState);
+    }
+
+    @Test
+    public void testExceptionMessage() {
+        IllegalBookingTransitionException e = new IllegalBookingTransitionException("oops");
+        assertEquals("oops", e.getMessage());
+    }
+}
